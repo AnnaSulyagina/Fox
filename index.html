@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Лис в лесу — голодная охота</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <div id="game-container">
+    <canvas id="game-canvas" width="800" height="480"></canvas>
+
+    <div id="hud-top">
+      <div id="hud-left">
+        <span id="hud-score">🐭 Съедено: 0</span>
+      </div>
+      <div id="hud-right">
+        <span id="hud-best">🏆 Рекорд: 0</span>
+        <button id="pause-btn">Пауза</button>
+      </div>
+    </div>
+
+    <div id="hunger-wrap">
+      <div id="hunger-label">Сытость: 100%</div>
+      <div id="hunger-bar">
+        <div id="hunger-fill"></div>
+      </div>
+    </div>
+
+    <div id="state-banner"></div>
+
+    <div id="overlay" class="hidden">
+      <h1 id="overlay-title"></h1>
+      <p id="overlay-text"></p>
+      <button id="new-game-btn">Новая игра</button>
+    </div>
+
+    <div id="start-screen">
+      <h1 id="start-title">Лис в лесу</h1>
+      <p id="start-text">Поймайте как можно больше мышей, пока не проголодались окончательно!</p>
+      <button id="start-btn">Начать игру</button>
+    </div>
+  </div>
+
+  <p class="hint">WASD / стрелки — движение &nbsp;|&nbsp; Space — прыжок &nbsp;|&nbsp; P — пауза &nbsp;|&nbsp; R — новая игра</p>
+
+  <script src="js/script.js"></script>
+</body>
+</html>

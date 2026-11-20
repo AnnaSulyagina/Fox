@@ -1,0 +1,213 @@
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  background: #0e1116;
+  font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+  color: #e8e8ee;
+}
+
+#game-container {
+  position: relative;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, .6);
+  line-height: 0;
+}
+
+canvas {
+  display: block;
+  background: #1d2b1f;
+}
+
+#hud-top {
+  position: absolute;
+  top: 10px;
+  left: 16px;
+  right: 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 12px;
+  pointer-events: none;
+  line-height: 1.4;
+}
+
+#hud-left {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: 17px;
+  font-weight: 700;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, .7);
+}
+
+#hud-right {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 6px;
+  font-size: 17px;
+  font-weight: 700;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, .7);
+  pointer-events: auto;
+}
+
+#pause-btn {
+  margin-top: 4px;
+  padding: 8px 16px;
+  font-size: 14px;
+  font-weight: 700;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  color: #1a1a24;
+  background: linear-gradient(180deg, #cfd6e4, #9aa3b8);
+  box-shadow: 0 3px 0 #5f677c, 0 6px 14px rgba(0,0,0,0.35);
+  transition: transform 0.08s, box-shadow 0.08s;
+  line-height: 1.2;
+}
+#pause-btn:active {
+  transform: translateY(2px);
+  box-shadow: 0 1px 0 #5f677c, 0 3px 8px rgba(0,0,0,0.35);
+}
+#pause-btn.paused {
+  background: linear-gradient(180deg, #ffd166, #f0a72a);
+  box-shadow: 0 3px 0 #b17211, 0 6px 14px rgba(0,0,0,0.35);
+}
+
+#hunger-wrap {
+  position: absolute;
+  top: 58px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 340px;
+  pointer-events: none;
+  text-align: center;
+}
+
+#hunger-label {
+  font-size: 13px;
+  font-weight: 700;
+  color: #fff;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, .8);
+  margin-bottom: 4px;
+  line-height: 1.4;
+}
+
+#hunger-bar {
+  position: relative;
+  height: 18px;
+  width: 100%;
+  background: rgba(0, 0, 0, 0.55);
+  border: 2px solid rgba(255, 255, 255, 0.6);
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+#hunger-fill {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  background: linear-gradient(90deg, #ffcf5a, #ff8c2a);
+  transition: width 0.1s linear, background 0.3s;
+}
+
+#hunger-fill.low {
+  background: linear-gradient(90deg, #ff5c5c, #b32525);
+  animation: pulse 0.7s infinite alternate;
+}
+
+@keyframes pulse {
+  from { opacity: 0.75; }
+  to   { opacity: 1; }
+}
+
+#state-banner {
+  position: absolute;
+  top: 130px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: none;
+  padding: 10px 22px;
+  border-radius: 14px;
+  background: rgba(10, 12, 20, 0.78);
+  border: 2px solid rgba(255, 255, 255, 0.25);
+  color: #fff;
+  font-size: 22px;
+  font-weight: 800;
+  text-align: center;
+  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.7);
+  pointer-events: none;
+  min-width: 120px;
+  line-height: 1.2;
+}
+#state-banner.visible { display: block; }
+
+#overlay,
+#start-screen {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 22px;
+  background: rgba(10, 12, 20, 0.85);
+  backdrop-filter: blur(3px);
+  text-align: center;
+  padding: 30px;
+  line-height: normal;
+}
+#overlay.hidden,
+#start-screen.hidden { display: none; }
+
+#overlay-title,
+#start-title {
+  font-size: 36px;
+  font-weight: 800;
+  line-height: 1.2;
+  color: #ffd166;
+  text-shadow: 0 3px 0 rgba(0, 0, 0, 0.5);
+  max-width: 90%;
+}
+
+#overlay-text,
+#start-text {
+  font-size: 18px;
+  line-height: 1.6;
+  color: #d8dbe6;
+  max-width: 90%;
+}
+#overlay-text b { color: #ffd166; }
+
+#new-game-btn,
+#start-btn {
+  padding: 12px 28px;
+  font-size: 18px;
+  font-weight: 700;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  color: #1a1a24;
+  background: linear-gradient(180deg, #ffd166, #f0a72a);
+  box-shadow: 0 6px 0 #b17211, 0 10px 24px rgba(0,0,0,0.35);
+  transition: transform 0.08s, box-shadow 0.08s;
+  line-height: 1.2;
+}
+#new-game-btn:active,
+#start-btn:active {
+  transform: translateY(3px);
+  box-shadow: 0 3px 0 #b17211, 0 6px 14px rgba(0,0,0,0.35);
+}
+
+.hint {
+  font-size: 13px;
+  color: #7a7f92;
+  user-select: none;
+}
